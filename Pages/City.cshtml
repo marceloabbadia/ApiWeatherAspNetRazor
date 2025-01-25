@@ -1,0 +1,61 @@
+﻿@page "/Weather/City"
+@model Api.Pages.CityModel
+
+@{
+	string partlyCloudy = "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png";
+	string sunny = "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png";
+	string blackLowCloud = "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png";
+	string clear = "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png";
+	string rain = "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0034_cloudy_with_heavy_rain_night.png";
+}
+
+<div class="text-center">
+	<h3 class="display-4">Weather Details for @Model.WeatherInfo.City</h3>
+</div>
+
+@if (Model.WeatherInfo != null)
+{
+	<div>
+		<p><strong>Country:</strong> @Model.WeatherInfo.Country</p>
+		<p><strong>Latitude:</strong> @Model.WeatherInfo.Lat</p>
+		<p><strong>Longitude:</strong> @Model.WeatherInfo.Lon</p>
+		<p><strong>Temperature:</strong> @Model.WeatherInfo.Temperature °C</p>
+		<p><strong>Wind Speed:</strong> @Model.WeatherInfo.WindSpeed km/h</p>
+		<p><strong>Pressure:</strong> @Model.WeatherInfo.Pressure hPa</p>
+		<p><strong>Humidity:</strong> @Model.WeatherInfo.Humidity %</p>
+		<p><strong>Feels Like:</strong> @Model.WeatherInfo.FeelsLike °C</p>
+		<p><strong>UV Index:</strong> @Model.WeatherInfo.UvIndex</p>
+		<p><strong>Visibility:</strong> @Model.WeatherInfo.Visibility km</p>
+		<p>
+			<strong>Icon:</strong>
+			@if (Model.WeatherInfo.weather_descriptions?.Equals("Partly cloudy", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				<img src="@partlyCloudy" alt="Partly Cloudy Icon" />
+			}
+			else if (Model.WeatherInfo.weather_descriptions?.Equals("Sunny", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				<img src="@sunny" alt="Sunny Icon" />
+			}
+			else if (Model.WeatherInfo.weather_descriptions?.Equals("Overcast", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				<img src="@blackLowCloud" alt="blackLowCloud Icon" />
+			}
+			else if (Model.WeatherInfo.weather_descriptions?.Equals("Clear", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				<img src="@clear" alt="Clear Icon" />
+			}
+			else if (Model.WeatherInfo.weather_descriptions?.Equals("Rain", StringComparison.OrdinalIgnoreCase) == true)
+			{
+				<img src="@rain" alt="rain Icon" />
+			}
+			else 
+			{
+				<span>No icon available</span>
+			}
+		</p>
+	</div>
+}
+else
+{
+	<p>Loading weather details...</p>
+}

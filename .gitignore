@@ -1,0 +1,30 @@
+# Compiled binary folders
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+logs/
+
+# Cache
+*.cache
+
+# App configuration
+appsettings.Development.json
+appsettings.Local.json
+
+# Build artifacts
+*.dll
+*.exe
+*.pdb
+
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store
