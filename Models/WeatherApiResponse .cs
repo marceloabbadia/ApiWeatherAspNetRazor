@@ -35,7 +35,7 @@
         public int WeatherCode { get; set; }
         public List<string> weather_descriptions { get; set; }
         public List<string> WeatherIcons { get; set; }
-        public double WindSpeed { get; set; }
+        public double Wind_Speed { get; set; }
         public int WindDegree { get; set; }
         public string WindDir { get; set; }
         public double Pressure { get; set; }
@@ -43,7 +43,7 @@
         public int Humidity { get; set; }
         public int Cloudcover { get; set; }
         public double FeelsLike { get; set; }
-        public int UvIndex { get; set; }
+        public int uv_index { get; set; }
         public double Visibility { get; set; }
     }
 

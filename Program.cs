@@ -28,9 +28,14 @@ namespace Api
 
             app.UseAuthorization();
 
+            app.MapGet("/", () => Results.Redirect("/Weather"));
+            
             app.MapStaticAssets();
             app.MapRazorPages()
                .WithStaticAssets();
+
+
+
 
             app.Run();
         }

@@ -6,7 +6,7 @@ namespace Api.Services
     {
         private readonly HttpClient _httpClient;
 
-        private const string AccessKey = "467cfbe2fc9845c034908abffc251042";
+        private const string AccessKey = "a6ee67382bac942359b7932c3cdd500c";
 
         public RealWeatherService(HttpClient httpClient)
         {
@@ -38,11 +38,11 @@ namespace Api.Services
                 weather_descriptions = weatherResponse?.Current?.weather_descriptions?.FirstOrDefault() ?? "No description", 
                 Temperature = weatherResponse?.Current?.Temperature ?? 0,
                 IconUrl = weatherResponse?.Current?.WeatherIcons?.FirstOrDefault() ?? "No icon", 
-                WindSpeed = weatherResponse?.Current?.WindSpeed ?? 0, 
+                WindSpeed = weatherResponse?.Current?.Wind_Speed ?? 0, 
                 Pressure = weatherResponse?.Current?.Pressure ?? 0, 
                 Humidity = weatherResponse?.Current?.Humidity ?? 0,
                 FeelsLike = weatherResponse?.Current?.FeelsLike ?? 0, 
-                UvIndex = weatherResponse?.Current?.UvIndex ?? 0, 
+                UvIndex = weatherResponse?.Current?.uv_index ?? 0, 
                 Visibility = weatherResponse?.Current?.Visibility ?? 0 
             };
 
