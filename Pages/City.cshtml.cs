@@ -20,11 +20,20 @@ namespace Api.Pages
 
         // Método que será chamado ao acessar a página City
         public async Task OnGetAsync(string city)
+       // public Weather OnGet(string city)
         {
-            if (!string.IsNullOrEmpty(city))
-            {
-                WeatherInfo = await _weatherService.GetWeatherAsync(city);
-            }
+             //WeatherInfo = await _weatherService.GetWeatherAsync(city);
+            WeatherInfo = _weatherService.GetWeatherAsync(city);
+
+            //if (WeatherInfo == null)
+            //{
+            //    return null;
+            //}
+            //else
+            //{
+            //    return WeatherInfo;
+            //}
+
         }
 
     }

@@ -4,6 +4,7 @@ namespace Api.Services
 {
     public interface IWeatherService
     {
-        Task<Weather> GetWeatherAsync(string city);
+        //Task<Weather> GetWeatherAsync(string city);
+        Weather GetWeatherAsync(string city);
     }
 }

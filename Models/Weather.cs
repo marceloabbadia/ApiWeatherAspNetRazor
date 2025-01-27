@@ -6,7 +6,7 @@
         public string Country { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
-        public string weather_descriptions { get; set; }
+        public string WeatherDescriptions { get; set; }
         public double Temperature { get; set; } 
         public string IconUrl { get; set; }
         public double WindSpeed { get; set; } 

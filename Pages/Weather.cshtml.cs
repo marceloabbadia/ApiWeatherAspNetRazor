@@ -3,7 +3,6 @@ namespace Api.Pages
 {
     public class WeatherModel : PageModel
     {
-        public Weather MyWeather { get; set; }
         private readonly IWeatherService _weatherService;
 
         public List<string> Cities = new List<string>
@@ -25,8 +24,6 @@ namespace Api.Pages
         {
             _weatherService = weatherService;
         }
-
-
 
 
         public void OnGet(List<string> cities)

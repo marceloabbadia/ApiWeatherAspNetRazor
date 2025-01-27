@@ -1,28 +1,49 @@
 ﻿using System.Text.Json;
+using RestSharp;
 
 namespace Api.Services
 {
     public class RealWeatherService : IWeatherService
     {
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        private const string AccessKey = "a6ee67382bac942359b7932c3cdd500c";
+        private  string _apiKey = "";
+        private  string _baseUrl = "";
 
-        public RealWeatherService(HttpClient httpClient)
+        //public RealWeatherService(HttpClient httpClient)
+        //{
+        //    _httpClient = httpClient;
+
+        //}
+
+        public RealWeatherService(HttpClient httpClient, IConfiguration configuration)
         {
+            _baseUrl = configuration.GetValue<string>("WeatherStack:BaseUrl");
+            _apiKey = configuration.GetValue<string>("WeatherStack:ApiKey");
             _httpClient = httpClient;
+            _configuration = configuration;
+
         }
 
-        public async Task<Weather> GetWeatherAsync(string city)
+
+       // public async Task<Weather> GetWeatherAsync(string city)
+        public Weather GetWeatherAsync(string city)
         {
-            var url = $"https://api.weatherstack.com/current?access_key={AccessKey}&query={city}";
+            var url = $"{_baseUrl}/current?access_key={_apiKey}&query={city}";
+            
+            var client = new RestClient(url);
+            var request = new RestRequest("", Method.Get);
+
+            var response = client.Execute(request);
+
 
             // Envia a requisição para a API
-            var response = await _httpClient.GetStringAsync(url);
+            //var response = await _httpClient.GetStringAsync(url);
 
 
             // Deserializa a resposta da API
-            var weatherResponse = JsonSerializer.Deserialize<WeatherApiResponse>(response, new JsonSerializerOptions
+            var weatherResponse = JsonSerializer.Deserialize<WeatherApiResponse>(response.Content, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
@@ -35,7 +56,7 @@ namespace Api.Services
                 Country = weatherResponse?.Location?.Country ?? "Unknown", 
                 Lat = double.TryParse(weatherResponse?.Location?.Lat, out double lat) ? lat : 0, 
                 Lon = double.TryParse(weatherResponse?.Location?.Lon, out double lon) ? lon : 0,
-                weather_descriptions = weatherResponse?.Current?.weather_descriptions?.FirstOrDefault() ?? "No description", 
+                WeatherDescriptions = weatherResponse?.Current?.weather_descriptions?.FirstOrDefault() ?? "No description", 
                 Temperature = weatherResponse?.Current?.Temperature ?? 0,
                 IconUrl = weatherResponse?.Current?.WeatherIcons?.FirstOrDefault() ?? "No icon", 
                 WindSpeed = weatherResponse?.Current?.Wind_Speed ?? 0, 

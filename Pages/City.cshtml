@@ -11,7 +11,7 @@
         { "Rain", "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0034_cloudy_with_heavy_rain_night.png" }
     };
 
-    string weatherDescription = Model.WeatherInfo?.weather_descriptions;
+    string weatherDescription = Model.WeatherInfo?.WeatherDescriptions;
     string iconUrl = weatherIcons.ContainsKey(weatherDescription) ? weatherIcons[weatherDescription] : null;
 }
 
